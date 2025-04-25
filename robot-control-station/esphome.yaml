@@ -1,0 +1,86 @@
+
+esphome:
+  name: robot_panel
+  platform: ESP32
+  board: esp32dev
+
+wifi:
+  ssid: "YOUR_WIFI_SSID"
+  password: "YOUR_WIFI_PASSWORD"
+
+  ap:
+    ssid: "Robot Panel Fallback"
+    password: "fallbackpass"
+
+captive_portal:
+
+logger:
+
+api:
+
+ota:
+
+mqtt:
+  broker: 192.168.1.100  # Replace with your Node-RED or Mosquitto broker IP
+  username: "mqtt_user"
+  password: "mqtt_pass"
+
+binary_sensor:
+  - platform: gpio
+    pin: GPIO16
+    name: "Robot Start Button"
+    on_press:
+      - mqtt.publish:
+          topic: robot/start
+          payload: "pressed"
+
+  - platform: gpio
+    pin: GPIO17
+    name: "Robot Stop Button"
+    on_press:
+      - mqtt.publish:
+          topic: robot/stop
+          payload: "pressed"
+
+  - platform: gpio
+    pin: GPIO19
+    name: "Manual Override Button"
+    on_press:
+      - mqtt.publish:
+          topic: robot/manual
+          payload: "pressed"
+
+  - platform: gpio
+    pin: GPIO18
+    name: "Emergency Stop"
+    device_class: safety
+    on_release:
+      - mqtt.publish:
+          topic: robot/estop
+          payload: "triggered"
+
+output:
+  - platform: gpio
+    pin: GPIO25
+    id: green_light
+
+  - platform: gpio
+    pin: GPIO26
+    id: red_light
+
+  - platform: gpio
+    pin: GPIO27
+    id: yellow_light
+
+light:
+  - platform: binary
+    name: "Green Light"
+    output: green_light
+
+  - platform: binary
+    name: "Red Light"
+    output: red_light
+
+  - platform: binary
+    name: "Yellow Light"
+    output: yellow_light
