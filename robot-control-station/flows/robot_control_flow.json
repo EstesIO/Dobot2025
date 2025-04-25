@@ -1,0 +1,82 @@
+[
+  {
+    "id": "mqtt_sub_start",
+    "type": "mqtt in",
+    "z": "1",
+    "name": "Start Button",
+    "topic": "robot/start",
+    "qos": "2",
+    "datatype": "auto",
+    "broker": "mqtt_broker",
+    "x": 150,
+    "y": 100,
+    "wires": [
+      [
+        "debug_node"
+      ]
+    ]
+  },
+  {
+    "id": "mqtt_sub_stop",
+    "type": "mqtt in",
+    "z": "1",
+    "name": "Stop Button",
+    "topic": "robot/stop",
+    "qos": "2",
+    "datatype": "auto",
+    "broker": "mqtt_broker",
+    "x": 150,
+    "y": 160,
+    "wires": [
+      [
+        "debug_node"
+      ]
+    ]
+  },
+  {
+    "id": "mqtt_sub_manual",
+    "type": "mqtt in",
+    "z": "1",
+    "name": "Manual Button",
+    "topic": "robot/manual",
+    "qos": "2",
+    "datatype": "auto",
+    "broker": "mqtt_broker",
+    "x": 150,
+    "y": 220,
+    "wires": [
+      [
+        "debug_node"
+      ]
+    ]
+  },
+  {
+    "id": "mqtt_sub_estop",
+    "type": "mqtt in",
+    "z": "1",
+    "name": "Emergency Stop",
+    "topic": "robot/estop",
+    "qos": "2",
+    "datatype": "auto",
+    "broker": "mqtt_broker",
+    "x": 150,
+    "y": 280,
+    "wires": [
+      [
+        "debug_node"
+      ]
+    ]
+  },
+  {
+    "id": "debug_node",
+    "type": "debug",
+    "z": "1",
+    "name": "Debug",
+    "active": true,
+    "console": "false",
+    "complete": "true",
+    "x": 400,
+    "y": 200,
+    "wires": []
+  }
+]
